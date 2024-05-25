@@ -15,16 +15,37 @@ const Shop = () => {
     }
     const [minPrice,setMinPrice] = useState("")
     const [maxPrice,setMaxPrice] = useState("")
+    const [selectedCategory, setSelectedCategory] = useState('');
     const {data} = useProductData()
-    const filterData = data?.data?.filter((item)=> !item?.isRohan)
-    const filterMinMaxData = filterData?.filter((item) => item?.price >= minPrice && item?.price <= maxPrice);
-    const finalData = (maxPrice || minPrice) ?filterMinMaxData:filterData
-    console.log("minPrice",filterMinMaxData)
+    const filterData = data?.data?.filter(item => {
+        // Filter out items where isRohan is false
+        if (item?.isRohan === false) return false;
+        
+        // Filter items within the price range
+        if ((minPrice && parseInt(item?.price) < parseInt(minPrice)) || (maxPrice && parseInt(item?.price) > parseInt(maxPrice))) return false;
+      
+        // Filter items based on the selected category
+        if (selectedCategory && item.category !== selectedCategory) return false;
+      
+        // Include all other items
+        return true;
+      });
+      
+      // finalData will contain the filtered data based on the conditions
+      const finalData = filterData?.filter((item)=>!item?.isRohan) || [];
+
+      const categoryData = data?.data?.filter((item)=>!item?.isRohan)
+      
+    const handleCategoryChange = (event) => {
+        setSelectedCategory(event.target.value);
+      };
+
+    const uniqueCategories = [...new Set(categoryData?.map(item => item.category))];
 
     return (
         <div>
             <Banner title={`Shop`} />
-            <ShopFilter setMaxPrice={setMaxPrice}  setMinPrice={setMinPrice} category={location?.state} filterData={filterData}/>
+            <ShopFilter  setSelectedCategory={setSelectedCategory} uniqueCategories={uniqueCategories} handleCategoryChange={handleCategoryChange} selectedCategory={selectedCategory} setMaxPrice={setMaxPrice}  setMinPrice={setMinPrice} category={location?.state} filterData={finalData}/>
             <div className='m-20'>
                 <div className='grid grid-cols-4 gap-6 justify-center sm:grid-cols-1 md:grid-cols-2'>
                 {finalData?.map((item, i) => {
