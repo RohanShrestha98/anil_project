@@ -16,6 +16,9 @@ const productSchema = new mongoose.Schema({
   inStock: {
     type: Boolean,
   },
+  isRohan: {
+    type: Boolean,
+  },
   brand: {
     type: String,
     required: true,
@@ -25,6 +28,9 @@ const productSchema = new mongoose.Schema({
     required: true,
   },
   discount: {
+    type: String,
+  },
+  inStockCount: {
     type: String,
   },
   category: {

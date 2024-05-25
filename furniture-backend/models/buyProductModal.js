@@ -39,6 +39,9 @@ const buyProductSchema = new mongoose.Schema({
   category: {
     type: String,
   },
+  userDetails: {
+    type: Array,
+  },
   categoryField: {
     type: Array,
   },

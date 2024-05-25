@@ -5,13 +5,17 @@ const {
   createBuyProduct,
   getAllBuyProduct,
   updateBuyProduct,
+  getAllTrackOrder,
   deleteBuyProduct,
+  getAllBuyProductByUser,
 } = require("../controllers/buyProductController");
 
 router.route("/list").get(getAllBuyProduct);
+router.route("/track-order/list").get(getAllTrackOrder);
+router.use(createUserValidateToken);
 router.route("/create").post(createBuyProduct);
 router.route("/update/:id").patch(updateBuyProduct);
 router.route("/delete/:id").delete(deleteBuyProduct);
-router.use(createUserValidateToken);
+router.route("/track-order").get(getAllBuyProductByUser);
 
 module.exports = router;

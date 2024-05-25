@@ -6,18 +6,26 @@ const BuyProductModal = require("../models/buyProductModal");
 //@access private
 const createBuyProduct = asyncHandler(async (req, res) => {
   const { name, description,price} = req.body;
-  // console.log("req.user.id",req.user.id)
+  console.log("req.user.id",req.user.id)
 
   if (!name || !description || !price) {
     res
       .status(400)
       .json({ success: false,value:req.body, messege: "All fields are required" });
   }
-  const details = await BuyProductModal.create({
-    ...req.body,
-    user_id: req?.user?.id??"user",
-  });
-  res.status(201).json({ success: true, details });
+  try{
+    const details = await BuyProductModal.create({
+      ...req.body,
+      user_id: req?.user?.id ?? "user",
+    });
+    res.status(201).json({ success: true, details });
+  }catch(err){
+    console.log("err",err)
+    res
+      .status(400)
+      .json({ success: false, messege: "You has just ordered this product" });
+  }
+  
 });
 
 //@desc update a product
@@ -39,6 +47,7 @@ const updateBuyProduct = asyncHandler(async (req, res) => {
     product.discount = req.body.discount ?? product.discount;
     product.price = req.body.price ?? product.price;
     product.brand = req.body.brand ?? product.brand;
+    product.status = req.body.status ?? product.status;
     product.inStock = req.body.inStock ?? product.inStock;
     product.images = req.body.images ?? product.images;
     const updatedProduct = await product.save();
@@ -81,10 +90,30 @@ const getAllBuyProduct = async (req, res) => {
     res.status(500).json({ success: false, message: "Failed to fetch files" });
   }
 };
+const getAllTrackOrder = async (req, res) => {
+  try {
+    const data = await BuyProductModal.find({ status: "Delivered"  });
+    res.status(200).json({ success: true, data });
+  } catch (error) {
+    res.status(500).json({ success: false, message: "Failed to fetch files" });
+  }
+};
+
+
+const getAllBuyProductByUser = async (req, res) => {
+  try {
+    const data = await BuyProductModal.find({ user_id: req.user.id });
+    res.status(200).json({ success: true, data });
+  } catch (error) {
+    res.status(500).json({ success: false, message: "Failed to fetch files" });
+  }
+};
 
 module.exports = {
   getAllBuyProduct,
   createBuyProduct,
   updateBuyProduct,
   deleteBuyProduct,
+  getAllTrackOrder,
+  getAllBuyProductByUser,
 };

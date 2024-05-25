@@ -9,9 +9,9 @@ const {
 } = require("../controllers/categoryController");
 
 router.route("/list").get(getAllCategory);
-router.use(createUserValidateToken);
 router.route("/create").post(createCategory);
-router.route("/:id").patch(updateCategory);
-router.route("/:id").delete(deleteCategory);
+router.route("/update/:id").patch(updateCategory);
+router.route("/delete/:id").delete(deleteCategory);
+router.use(createUserValidateToken);
 
 module.exports = router;

@@ -7,7 +7,7 @@ const createUserValidateToken = asyncHandler(async (req, res, next) => {
   if (authHeader && authHeader.startsWith("Bearer")) {
     token = authHeader.split(" ")[1];
     jwt.verify(token, process.env.ACCESS_TOKEN, (err, decoded) => {
-      if (err || decoded.user?.email !== "superadmin@mail.com") {
+      if (err) {
         res.status(401);
         throw new Error("User is not authorized");
       }

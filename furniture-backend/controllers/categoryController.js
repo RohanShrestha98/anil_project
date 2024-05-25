@@ -12,11 +12,11 @@ const createCategory = asyncHandler(async (req, res) => {
       .json({ success: false, messege: "All fields are required" });
   }
   const details = await CategoryModal.create({
-    title,
+  title,
     description,
     tags,
     thumbnail,
-    user_id: req.user.id,
+    user_id: req?.user?.id??"admin",
   });
   res.status(201).json({ success: true, details });
 });
@@ -47,6 +47,7 @@ const updateCategory = asyncHandler(async (req, res) => {
 //@route DELETE /api/category/:id
 //@access private
 const deleteCategory = asyncHandler(async (req, res) => {
+  console.log("req.params.id",req.params.id)
   try {
     const deletedCategory = await CategoryModal.findByIdAndDelete(
       req.params.id
