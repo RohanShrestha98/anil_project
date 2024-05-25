@@ -7,6 +7,7 @@ import Shop from "./Pages/Shop";
 import Login from "./Pages/Login";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import TrackOrder from "./Components/Product/TrackOrder";
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
             <Route index element={<Dashboard />} />
             <Route path="product" element={<Product />} />
             <Route path="customer" element={<Customer />} />
+            <Route path="order-product" element={<TrackOrder />} />
             <Route path="shop" element={<Shop />} />
           </Route>
           <Route path="login" element={<Login/>} />

@@ -8,7 +8,7 @@ import { HiOutlineViewGrid, HiOutlineShoppingBag, HiOutlineUserGroup, HiOutlineS
 const sideMenu = [
     { id: 1, label: 'Dashboard', menuIcon: <HiOutlineViewGrid />, path: '/' },
     { id: 2, label: 'Product', menuIcon: <HiOutlineShoppingBag />, path: '/product' },
-    // { id: 3, label: 'Customer', menuIcon: <HiOutlineUserGroup />, path: '/customer' },
+    { id: 3, label: 'Order Product', menuIcon: <HiOutlineUserGroup />, path: '/order-product' },
     // { id: 4, label: 'Shop', menuIcon: <HiOutlineShoppingCart />, path: '/shop' },
     { id: 5, label: 'Income', menuIcon: <HiOutlineCurrencyDollar />, path: '/' },
     // { id: 6, label: 'Promote', menuIcon: <HiOutlineArrowCircleUp />, path: '/' },

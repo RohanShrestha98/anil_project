@@ -18,3 +18,6 @@ export const useQueryData = (key, path, params = "", enabled = true) => {
 
 export const useProductData = () =>
   useQueryData(["product"], `api/product/list`);
+
+export const useTrackOrderData = () =>
+  useQueryData(["track-order"], `api/buy-product/track-order/list`);
