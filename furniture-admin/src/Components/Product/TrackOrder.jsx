@@ -7,12 +7,13 @@ import { toast } from 'react-toastify';
 const TrackOrder = () => {
    
 
-    const {data,isLoading,isError} =useTrackOrderData()
+    const {data,isLoading,isError} = useTrackOrderData()
     const [statusToggle, setStatusToggle] = useState(false)
     const [selectedStatus, setSelectedStatus] = useState()
     const [selectedProduct, setSelectedProduct] = useState()
     const statusChangeMutation = useStatusToggleMutation()
-    const filterData = data?.data?.filter((item)=>!item?.categoryField )
+    const filterData = data?.data?.filter((item)=>item?.isAnil)
+
     const status = [
         {
             value: "Pending",
@@ -33,6 +34,7 @@ const TrackOrder = () => {
             ...data,
             status: status
         }
+        console.log("postData",postData)
         try {
             const response = await statusChangeMutation.mutateAsync(["patch", `update/${id}`, postData])
             toast.success("Order status change successfully")

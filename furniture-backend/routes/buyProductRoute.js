@@ -12,9 +12,9 @@ const {
 
 router.route("/list").get(getAllBuyProduct);
 router.route("/track-order/list").get(getAllTrackOrder);
+router.route("/update/:id").patch(updateBuyProduct);
 router.use(createUserValidateToken);
 router.route("/create").post(createBuyProduct);
-router.route("/update/:id").patch(updateBuyProduct);
 router.route("/delete/:id").delete(deleteBuyProduct);
 router.route("/track-order").get(getAllBuyProductByUser);
 

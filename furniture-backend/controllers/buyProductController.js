@@ -16,6 +16,7 @@ const createBuyProduct = asyncHandler(async (req, res) => {
   try{
     const details = await BuyProductModal.create({
       ...req.body,
+      isAnil:true,
       user_id: req?.user?.id ?? "user",
     });
     res.status(201).json({ success: true, details });
@@ -32,6 +33,7 @@ const createBuyProduct = asyncHandler(async (req, res) => {
 //@route PATCh /api/product/:id
 //@access private
 const updateBuyProduct = asyncHandler(async (req, res) => {
+  console.log("res",res)
   try {
     const product = await BuyProductModal.findById(req.params.id);
 
@@ -47,6 +49,7 @@ const updateBuyProduct = asyncHandler(async (req, res) => {
     product.discount = req.body.discount ?? product.discount;
     product.price = req.body.price ?? product.price;
     product.brand = req.body.brand ?? product.brand;
+    product.isAnil = req.body.isRohan ?? product.isAnil;
     product.status = req.body.status ?? product.status;
     product.inStock = req.body.inStock ?? product.inStock;
     product.images = req.body.images ?? product.images;
@@ -84,7 +87,7 @@ const deleteBuyProduct = asyncHandler(async (req, res) => {
 const getAllBuyProduct = async (req, res) => {
   try {
     // Fetch all files with their title and description
-    const data = await BuyProductModal.find();
+    const data = await BuyProductModal.find({ isAnil: true  });
     res.status(200).json({ success: true, data });
   } catch (error) {
     res.status(500).json({ success: false, message: "Failed to fetch files" });

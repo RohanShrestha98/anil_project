@@ -16,6 +16,9 @@ const buyProductSchema = new mongoose.Schema({
   inStock: {
     type: Boolean,
   },
+  isAnil: {
+    type: Boolean,
+  },
   brand: {
     type: String,
     required: true,

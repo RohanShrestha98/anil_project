@@ -20,8 +20,7 @@ const provinces = [
     { value: 'Sudurpashchim', option: 'Sudurpashchim' },
 ]
 const options = [
-    { id: 1, label: 'Direct Bank Transfer', description: 'Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account.' },
-    { id: 2, label: 'Case on Delivery', description: 'Make your payment upon the delivery of the product in your place.' },
+    { id: 2, label: 'Cash on Delivery', description: 'Make your payment upon the delivery of the product in your place.' },
 ];
 
 const CheckoutForm = ({checkoutData}) => {
@@ -37,7 +36,7 @@ useEffect(() => {
 const buyProdcutMutation = useBuyProductMutation()
 
   const handlePlaceOrder = async (data) => {
-    const postData = {userDetails:data,...checkoutData,status:"pending"}
+    const postData = {userDetails:data,...checkoutData,status:"pending",isAnil:true}
     try {
       const result = await buyProdcutMutation.mutateAsync(["post", "create/", postData]);
       toast.success("Product order successfully")

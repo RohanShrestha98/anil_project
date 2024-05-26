@@ -10,9 +10,7 @@ const PopoverItem = [
     { id: 2, icon: <HiOutlineBell fontSize={26} className='cursor-pointer' />, title: 'Notification', items: 'This is notification panel.' },
 ]
 const menuItem = [
-    { id: 1, label: 'Your Profile', path: '/' },
-    { id: 2, label: 'Settings', path: '/product' },
-    { id: 3, label: 'Log out', path: '/customer' }
+    { id: 3, label: 'Log out', path: '/logout' }
 ]
 
 const Topbar = () => {
